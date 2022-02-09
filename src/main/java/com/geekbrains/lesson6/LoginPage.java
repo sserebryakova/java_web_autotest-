@@ -1,5 +1,6 @@
 package com.geekbrains.lesson6;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,18 +24,20 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@id='login_btn']")
     public WebElement loginButton;
 
-
+    @Step("Заполнить поле логина")
     public LoginPage fillLogin(String login) {
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LOGIN_INPUT_LOCATOR_BY_XPATH)));
         loginInput.sendKeys(login);
         return this;
     }
 
+    @Step("Заполнить поле пароля")
     public LoginPage fillPassword(String password) {
         passwordInput.sendKeys(password);
         return this;
     }
 
+    @Step("Клик на кнопку логина")
     public MainPage clickLoginButton() {
         try {
             Thread.sleep(20000);

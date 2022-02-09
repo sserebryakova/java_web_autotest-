@@ -35,18 +35,17 @@ public class DiaryNewTest {
         webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
         driver.get(DIARY_URL);
-        Cookie cookie = new Cookie("_identity_", "97ad5e9db7fa0cb5240873c4fc6e2eee2f6863693ac8d8ed72b8914f165" +
-                "d7348a%3A2%3A%7Bi%3A0%3Bs%3A10%3A%22_identity_%22%3Bi%3A1%3Bs%3A54%3A%22%5B%223562637%22%2C%22RS3nxkB8" +
-                "cN6NogcVMUvXMExWZo_wzEN-%22%2C2592000%5D%22%3B%7D");
+        Cookie cookie = new Cookie("_identity_", "ea91a4a441354d55fa70392e4fb5afb288083512407e0e55c351affe323" +
+                "a728ca%3A2%3A%7Bi%3A0%3Bs%3A10%3A%22_identity_%22%3Bi%3A1%3Bs%3A52%3A%22%5B3562637%2C%22RS3nxkB8cN6Nogc" +
+                "VMUvXMExWZo_wzEN-%22%2C2592000%5D%22%3B%7D");
         driver.manage().addCookie(cookie);
         driver.navigate().refresh();
 
     }
     @Test
     void MyProfileTest() {
-        actions.click(driver.findElement(By.xpath("//*[@id='navbar_user-collapse']/ul/li[@class='username']/a")))
-                .build()
-                .perform();
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='navbar_user-collapse']/ul/li[@class='username']/a")));
+        driver.findElement(By.xpath("//*[@id='navbar_user-collapse']/ul/li[@class='username']/a")).click();
         assertThat(driver.findElement(By.xpath("//*[@id='wrapper']//div[@class='user col-lg-4']/h1")), hasText("sveta73"));
     }
 
