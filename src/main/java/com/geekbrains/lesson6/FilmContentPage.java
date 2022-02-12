@@ -1,5 +1,6 @@
 package com.geekbrains.lesson6;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,16 +28,20 @@ public class FilmContentPage extends BasePage {
     @FindBy(xpath = SUBSCRIBE_XPATH_LOCATOR)
     private WebElement subscribeContentFilm;
 
+    @Step("Клик на пост по имени профиля участника")
     public FilmContentPage clickContentFilmByName(String name) {
         filmsContentList.stream().filter(f -> f.getText().contains(name)).findFirst().get().click();
         return this;
     }
+
+    @Step("Клик на элемент Подписаться")
     public FilmContentPage clickSubscribeContent() {
         webDriverWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(SUBSCRIBE_BUTTON_XPATH_LOCATOR)));
         subscribeContentButton.click();
         return this;
     }
 
+    @Step("Проверить подписку профиля участника")
     public FilmContentPage checkSubscribeContentFilm() {
         webDriverWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(SUBSCRIBE_XPATH_LOCATOR)));
         assertThat(subscribeContentFilm, isDisplayed());
